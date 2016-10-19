@@ -161,11 +161,11 @@ Material:
       data:
         first:
           name: _EmissiveColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .218999997, g: .441000015, b: .178000003, a: 1}
       data:
         first:
           name: _AmbientColor
-        second: {r: 0, g: 1, b: 1, a: 1}
+        second: {r: .172000006, g: 1, b: 1, a: 1}
       data:
         first:
           name: _TestVector
