@@ -41,11 +41,16 @@
 			o.Alpha = c.a;
 		}
 
-		inline float4 LightingBasicDiffuse(SurfaceOutput s, fixed3 lightDir, fixed atten)
+		inline float4 LightingBasicDiffuse(SurfaceOutput s, fixed3 lightDir, half3 viewDir, fixed atten)
 		{
 			float difLight = max(0, dot(s.Normal, lightDir));
+			float rimLight = max(0, dot(s.Normal, viewDir));
+			// Add this line  
+			float dif_hLambert = difLight * 0.5 + 0.5;
+			float rim_hLambert = rimLight * 0.5 + 0.5;
+			float3 ramp = tex2D(_MainTex, float2(dif_hLambert, rim_hLambert)).rgb;
 			float4 col;
-			col.rgb = s.Albedo * _LightColor0.rgb * (difLight * atten * 2);
+			col.rgb = s.Albedo * _LightColor0.rgb * (ramp);
 			col.a = s.Alpha;
 			return col;
 		}
